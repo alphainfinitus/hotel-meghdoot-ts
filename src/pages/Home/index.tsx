@@ -30,6 +30,16 @@ const Home = () => {
 
 			</div>
 				CONTENT HERE
+				<br/>
+				<div className='h-screen'>
+					CONTENT HERE
+				</div>
+				<div className='h-screen'>
+					CONTENT HERE
+				</div>
+				<div className='h-screen'>
+					CONTENT HERE
+				</div>
 		</div>
 	)
 }

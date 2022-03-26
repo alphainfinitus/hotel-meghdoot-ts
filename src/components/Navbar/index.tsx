@@ -1,4 +1,28 @@
+import { useEffect } from "react";
+
 const Navbar = () => {
+	var navElement = document.getElementById('navbar');
+	var menuElement = document.getElementById('menu-list');
+
+  const changeNavBG = () => {
+    if (window.scrollY >= window.innerHeight - 40) {
+			navElement?.classList.remove("bg-transparent", "text-gray-300");
+			menuElement?.classList.remove("text-gray-300");
+      navElement?.classList.add("bg-white", "text-gray-700");
+			menuElement?.classList.add("text-gray-700");
+    } else {
+			navElement?.classList.remove("bg-white", "text-gray-700");
+			menuElement?.classList.remove("text-gray-700");
+      navElement?.classList.add("bg-transparent", "text-gray-300");
+			menuElement?.classList.add("text-gray-300");
+    }
+  }
+
+  useEffect(() => {
+    changeNavBG()
+    window.addEventListener("scroll", changeNavBG);
+		return () => window.removeEventListener("scroll", changeNavBG);
+  });
 
 const toggleMenu = () => {
 	const menu = document.querySelector('#menu');
@@ -7,6 +31,7 @@ const toggleMenu = () => {
 
 	return (
 		<nav
+				id="navbar"
 				className="
 					flex flex-wrap
 					items-center
@@ -19,6 +44,7 @@ const toggleMenu = () => {
 					fixed
 					top-0
 					z-50
+					bg-transparent
 				"
 			>
 				{/* Toggle Menu Btn Mobile */}
@@ -65,6 +91,7 @@ const toggleMenu = () => {
 				{/* Menu */}
 				<div className="hidden w-full md:flex md:items-center md:w-auto" id="menu">
 					<ul
+						id="menu-list"
 						className="
 							pt-4
 							text-base text-gray-300
