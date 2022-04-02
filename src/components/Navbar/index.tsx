@@ -1,20 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import logoWhite from '../../assets/logo-white.png';
+import logoBlack from '../../assets/logo-black.png';
 
 const Navbar = () => {
-	var navElement = document.getElementById('navbar');
-	var menuElement = document.getElementById('menu-list');
+	const [logoLink, setLogoLink] = useState<string>(logoWhite);
 
   const changeNavBG = () => {
-    if (window.scrollY >= window.innerHeight - 40) {
+		var navElement = document.getElementById('navbar');
+		var menuElement = document.getElementById('menu-list');
+
+    if (window.scrollY >= window.innerHeight - 120) {
 			navElement?.classList.remove("bg-transparent", "text-gray-300");
 			menuElement?.classList.remove("text-gray-300");
       navElement?.classList.add("bg-white", "text-gray-700");
 			menuElement?.classList.add("text-gray-700");
+			setLogoLink(logoBlack);
     } else {
 			navElement?.classList.remove("bg-white", "text-gray-700");
 			menuElement?.classList.remove("text-gray-700");
       navElement?.classList.add("bg-transparent", "text-gray-300");
 			menuElement?.classList.add("text-gray-300");
+			setLogoLink(logoWhite);
     }
   }
 
@@ -22,7 +28,7 @@ const Navbar = () => {
     changeNavBG()
     window.addEventListener("scroll", changeNavBG);
 		return () => window.removeEventListener("scroll", changeNavBG);
-  });
+  }, []);
 
 const toggleMenu = () => {
 	const menu = document.querySelector('#menu');
@@ -43,6 +49,7 @@ const toggleMenu = () => {
 					text-lg text-gray-300
 					fixed
 					top-0
+					transition-all
 					z-50
 					bg-transparent
 				"
@@ -67,18 +74,21 @@ const toggleMenu = () => {
 
 				{/* Logo */}
 				<div>
-					<a id="logo" href="#">
-						Meghdoot
+					<a id="logo" href="#" className="hidden md:block">
+						<img src={logoLink} alt="Hotel Meghdoot" style={ { width: "140px", height: "auto" } } />
+					</a>
+					<a id="logo" href="#" className="md:hidden">
+						<img src={logoLink} alt="Hotel Meghdoot" style={ { width: "100px", height: "auto" } } />
 					</a>
 				</div>
 
 				{/* Book Now Button Mobile*/}
 				<a href="#" className="relative px-2 py-0 block md:hidden font-medium text-white group">
-					<span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
-					<span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
+					<span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-green-500 group-hover:bg-green-700 group-hover:skew-x-12"></span>
+					<span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-green-600 group-hover:bg-green-500 group-hover:-skew-x-12"></span>
 
-					<span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
-					<span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
+					<span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-green-600 -rotate-12"></span>
+					<span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-green-400 -rotate-12"></span>
 					
 					<span className="relative flex items-center">
 					<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -100,48 +110,56 @@ const toggleMenu = () => {
 							md:pt-0"
 					>
 						<li>
-							<a className="md:p-4 py-2 block hover:text-purple-400" href="#"
-								>Features</a
-							>
+							<a className="md:p-4 py-2 block hover:text-green-400" href="#">
+								Home
+							</a>
 						</li>
 						<li>
-							<a className="md:p-4 py-2 block hover:text-purple-400" href="#"
-								>Pricing</a
-							>
+							<a className="md:p-4 py-2 block hover:text-green-400" href="#">
+								About
+							</a>
 						</li>
 						<li>
-							<a className="md:p-4 py-2 block hover:text-purple-400" href="#"
-								>Customers</a
-							>
+							<a className="md:p-4 py-2 block hover:text-green-400" href="#">
+								Rooms
+							</a>
 						</li>
 						<li>
-							<a className="md:p-4 py-2 block hover:text-purple-400" href="#"
-								>Blog</a
-							>
+							<a className="md:p-4 py-2 block hover:text-green-400" href="#">
+								Facilities
+							</a>
 						</li>
 						<li>
-							<a
-								className="md:p-4 py-2 block hover:text-purple-400 text-purple-500"
-								href="#"
-								>Sign Up</a
-							>
+							<a className="md:p-4 py-2 block hover:text-green-400" href="#">
+								Attractions
+							</a>
+						</li>
+						<li>
+							<a className="md:p-4 py-2 block hover:text-green-400" href="#">
+								Gallery
+							</a>
+						</li>
+						<li>
+							<a className="md:p-4 py-2 block hover:text-green-400" href="#">
+								Contact
+							</a>
 						</li>
 					</ul>
 				</div>
 
 				{/* Book Now Button */}
 				<a href="#" className="relative px-4 py-1 hidden md:block font-medium text-white group">
-					<span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
-					<span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
+					<span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-green-500 group-hover:bg-green-700 group-hover:skew-x-12"></span>
+					<span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-green-600 group-hover:bg-green-500 group-hover:-skew-x-12"></span>
 
-					<span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
-					<span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
+					<span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-green-600 -rotate-12"></span>
+					<span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-green-400 -rotate-12"></span>
 					
 					<span className="relative flex items-center">
 					<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
 						<path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
 					</svg>
-						<span>Book Now</span>
+						<span className="text-lg md:text-base">Book Now</span>
 					</span>
 				</a>
 
